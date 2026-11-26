@@ -119,13 +119,11 @@
  	} else {
 @@ -248,6 +265,9 @@
  	}
- 
- 	uint32_t ocs = utrd->dw2 & 0xff;
-+	if (su.gs101 && ocs == 8 && (ucd->resp[6] || ucd->resp[7])) {
-+		ocs = 0;        /* BROKEN_OCS_FATAL_ERROR: OCS 7 with a response present is a normal completion */
+  	uint32_t ocs = utrd->dw2 & 0xff;
++	if (su.gs101 && (ocs == 7 || ocs == 8) && (ucd->resp[6] || ucd->resp[7])) {
++		ocs = 0;        /* BROKEN_OCS_FATAL_ERROR: OCS 7/8 with a response present is a normal completion */
 +	}
  	if (ocs || ucd->resp[0] != 0x21 || ucd->resp[6] || ucd->resp[7]) {
- 		printf("SWEET UFS: command 0x%02x failed: ocs 0x%x upiu 0x%x response 0x%x status 0x%x\n",
  		    cdb[0], ocs, ucd->resp[0], ucd->resp[6], ucd->resp[7]);
 @@ -357,7 +377,8 @@
  ufs_take_over_host(void)

@@ -121,9 +121,9 @@ index 0000000..963cdc1
 +#include <stdint.h>
 +
 +static const uint8_t sweet_no_amcc_rorgn __attribute__((unused)) = 0;
-diff --git a/osfmk/arm64/caches_asm.s b/osfmk/arm64/caches_asm.s
-index f2c2a00..e777b77 100644
---- a/osfmk/arm64/caches_asm.s
+	if (su.gs101 && (ocs == 7 || ocs == 8) && (ucd->resp[6] || ucd->resp[7])) {
+		ocs = 0;        /* BROKEN_OCS_FATAL_ERROR: OCS 7/8 with a response present is a normal completion */
+	}
 +++ b/osfmk/arm64/caches_asm.s
 @@ -212,6 +212,7 @@ L_ipui_loop:
  	.globl EXT(CleanPoC_Dcache)

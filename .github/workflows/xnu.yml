@@ -9,7 +9,7 @@ on:
 
 jobs:
   kernel:
-    runs-on: ubuntu-24.04
+    runs-on: macos-15
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4

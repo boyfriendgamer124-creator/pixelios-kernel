@@ -121,7 +121,7 @@
  	}
  
  	uint32_t ocs = utrd->dw2 & 0xff;
-+	if (su.gs101 && ocs == 7 && (ucd->resp[6] || ucd->resp[7])) {
++	if (su.gs101 && ocs == 8 && (ucd->resp[6] || ucd->resp[7])) {
 +		ocs = 0;        /* BROKEN_OCS_FATAL_ERROR: OCS 7 with a response present is a normal completion */
 +	}
  	if (ocs || ucd->resp[0] != 0x21 || ucd->resp[6] || ucd->resp[7]) {
